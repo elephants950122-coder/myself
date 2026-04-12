@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林建宇 | 個人簡介</title>
+    <style>
+        :root {
+            --bg-dark: #12141d; 
+            --bg-gradient: radial-gradient(circle at 50% 50%, #1e2235 0%, #12141d 100%);
+            --surface: rgba(255, 255, 255, 0.05);
+            --primary: #38bdf8;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'PingFang TC', '微軟正黑體', sans-serif; }
+        body { background: var(--bg-gradient); color: var(--text-main); height: 100vh; overflow: hidden; }
+
+        /* --- 頂部導覽列 --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px; 
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+            display: flex; align-items: center; padding: 0 50px; z-index: 1000; 
+        }
+        .current-page { font-size: 0.9rem; color: var(--primary); font-weight: bold; letter-spacing: 2px; }
+
+        /* --- 選單按鈕 --- */
+        .menu-toggle {
+            position: fixed; top: 15px; right: 50px; z-index: 2001;
+            cursor: pointer; display: flex; align-items: center; gap: 12px;
+            padding: 10px 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px;
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(15px);
+            transition: 0.3s; color: var(--text-main);
+        }
+        .menu-toggle:hover { border-color: var(--primary); background: rgba(56, 189, 248, 0.15); }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark); z-index: 2000;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .overlay-nav { display: flex; flex-direction: column; gap: 40px; text-align: center; }
+        .overlay-nav a { color: var(--text-muted); text-decoration: none; font-size: 2.5rem; font-weight: bold; transition: 0.4s; }
+        .overlay-nav a:hover { color: var(--primary); transform: scale(1.1); }
+
+        /* --- 內容佈局 --- */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 70px 12% 0; gap: 40px; }
+        .hero-text { flex: 1.2; }
+        h1 { font-size: 4.5rem; font-weight: 900; color: var(--primary); line-height: 1; }
+        h2 { font-size: 1.5rem; color: var(--text-muted); letter-spacing: 4px; margin-top: 10px; opacity: 0.6; }
+        .info-group { margin: 30px 0; }
+        .info-item { font-size: 1rem; margin-bottom: 12px; display: flex; }
+        .info-label { color: var(--primary); font-weight: bold; margin-right: 15px; width: 45px; }
+        .interest-tags { display: flex; gap: 12px; margin-bottom: 30px; }
+        .tag { padding: 6px 18px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px; font-size: 0.85rem; color: var(--primary); }
+        .hero-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 2; border-left: 3px solid var(--primary); padding-left: 25px; }
+        
+        .hero-image { flex: 0.8; display: flex; justify-content: flex-end; }
+        .photo-frame {
+            width: 360px; height: 480px; border-radius: 24px;
+            background: url('/static/me.jpg') center/cover no-repeat;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .hero { flex-direction: column; text-align: center; overflow-y: auto; }
+            .hero-image { display: none; }
+            .info-item { justify-content: center; }
+            .interest-tags { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header><div class="current-page">個人簡介 / HOME</div></header>
+    <div class="menu-toggle" onclick="toggleMenu()">選單 ☰</div>
+    <div id="navOverlay" class="overlay">
+        <div style="position: absolute; top: 40px; right: 50px; cursor: pointer;" onclick="toggleMenu()">關閉 ✕</div>
+        <nav class="overlay-nav">
+            <a href="/">個人簡介</a>
+            <a href="/test">特質分析</a>
+            <a href="/job">職務研究</a>
+            <a href="/resume">實戰作品</a>
+        </nav>
+    </div>
+    <section class="hero">
+        <div class="hero-text">
+            <h1>林建宇</h1>
+            <h2>LIN, CHIEN-YU</h2>
+            <div class="info-group">
+                <div class="info-item"><span class="info-label">系級</span> 資訊管理學系 二年B班</div>
+                <div class="info-item"><span class="info-label">學號</span> 411303114</div>
+                <div class="info-item"><span class="info-label">信箱</span> s1130311@o365st.pu.edu.tw</div>
+            </div>
+            <div class="interest-tags">
+                <span class="tag">籃球</span><span class="tag">排球</span><span class="tag">戶外旅遊</span>
+            </div>
+            <div class="hero-desc">
+                目前擔任第31屆資管系系學會副會長。我熱衷於將程式邏輯轉化為解決方案，享受在代碼世界與實體硬體之間尋找平衡的過程。
+            </div>
+        </div>
+        <div class="hero-image"><div class="photo-frame"></div></div>
+    </section>
+    <script>function toggleMenu() { const o = document.getElementById('navOverlay'); o.style.display = (o.style.display==='flex')?'none':'flex'; }</script>
+</body>
+</html>

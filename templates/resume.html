@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實戰作品 | 林建宇</title>
+    <style>
+        :root {
+            --bg-dark: #12141d; 
+            --bg-gradient: linear-gradient(135deg, #1e2235 0%, #12141d 100%);
+            --surface: rgba(255, 255, 255, 0.05);
+            --primary: #38bdf8;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'PingFang TC', sans-serif; }
+        body { background: var(--bg-gradient); background-attachment: fixed; color: var(--text-main); line-height: 1.8; }
+
+        /* --- 頂部導覽列 --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px; 
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+            display: flex; align-items: center; padding: 0 50px; z-index: 1000; 
+        }
+        .current-page { font-size: 0.9rem; color: var(--primary); font-weight: bold; letter-spacing: 2px; }
+
+        /* --- 選單按鈕 --- */
+        .menu-toggle {
+            position: fixed; top: 15px; right: 50px; z-index: 2001;
+            cursor: pointer; display: flex; align-items: center; gap: 12px;
+            padding: 10px 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px;
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(15px);
+            transition: 0.3s; color: var(--text-main);
+        }
+        .menu-toggle:hover { border-color: var(--primary); background: rgba(56, 189, 248, 0.15); }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark); z-index: 2000;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .overlay-nav { display: flex; flex-direction: column; gap: 35px; text-align: center; }
+        .overlay-nav a { color: var(--text-muted); text-decoration: none; font-size: 2.5rem; font-weight: bold; transition: 0.4s; }
+        .overlay-nav a:hover { color: var(--primary); }
+
+        /* --- 內容區域 --- */
+        .container { max-width: 1100px; margin: 150px auto; padding: 0 5%; }
+        h2 { font-size: 3.5rem; font-weight: 800; margin-bottom: 60px; text-align: center; }
+        .project-item { display: flex; gap: 50px; align-items: center; margin-bottom: 80px; }
+        .project-info { flex: 1.2; }
+        .project-img { flex: 0.8; height: 350px; border-radius: 24px; background: #333; background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .project-info h3 { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
+        .tag { display: inline-block; padding: 5px 15px; border: 1px solid var(--primary); border-radius: 30px; font-size: 0.8rem; color: var(--primary); margin-bottom: 20px; }
+
+        @media (max-width: 900px) { .project-item { flex-direction: column; text-align: center; } .project-img { width: 100%; height: 280px; } h2 { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+    <header><div class="current-page">實戰作品 / PROJECTS</div></header>
+    <div class="menu-toggle" onclick="toggleMenu()">選單 ☰</div>
+    
+    <div id="navOverlay" class="overlay">
+        <div style="position: absolute; top: 40px; right: 50px; cursor: pointer;" onclick="toggleMenu()">關閉 ✕</div>
+        <nav class="overlay-nav">
+            <a href="/">個人簡介</a>
+            <a href="/test">特質分析</a>
+            <a href="/job">職務研究</a>
+            <a href="/resume">實戰作品</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h2>技術專案與實作經歷</h2>
+        
+        <div class="project-item">
+            <div class="project-info">
+                <div class="tag">Mobile App / Firebase</div>
+                <h3>瑪利亞基金會麵包預約系統</h3>
+                <p>運用即時資料庫技術開發，整合自動化通知功能，實踐以科技服務社會的精神，目前已完成原型機開發。</p>
+            </div>
+            <div class="project-img" style="background-image: url('/static/bread_project.jpg');"></div>
+        </div>
+
+        <div class="project-item" style="flex-direction: row-reverse;">
+            <div class="project-info">
+                <div class="tag">IoT / Arduino</div>
+                <h3>硬體俄羅斯方塊</h3>
+                <p>從電路焊接、點陣顯示器控制到遊戲碰撞邏輯撰寫，完全由硬體與底層 C 語言實現的趣味實作。</p>
+            </div>
+            <div class="project-img" style="background-image: url('/static/iot_project.jpg');"></div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const overlay = document.getElementById('navOverlay');
+            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>

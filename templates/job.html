@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>職務研究 | 林建宇</title>
+    <style>
+        :root {
+            --bg-dark: #12141d; 
+            --bg-gradient: linear-gradient(135deg, #1e2235 0%, #12141d 100%);
+            --surface: rgba(255, 255, 255, 0.05);
+            --primary: #38bdf8;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'PingFang TC', '微軟正黑體', sans-serif; }
+        body { background: var(--bg-gradient); background-attachment: fixed; color: var(--text-main); line-height: 1.8; }
+
+        /* --- 頂部導覽列 --- */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 70px; 
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+            display: flex; align-items: center; padding: 0 50px; z-index: 1000; 
+        }
+        .current-page { font-size: 0.9rem; color: var(--primary); font-weight: bold; letter-spacing: 2px; }
+
+        /* --- 選單按鈕 --- */
+        .menu-toggle {
+            position: fixed; top: 15px; right: 50px; z-index: 2001;
+            cursor: pointer; display: flex; align-items: center; gap: 12px;
+            padding: 10px 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px;
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(15px);
+            transition: 0.3s; color: var(--text-main);
+        }
+        .menu-toggle:hover { border-color: var(--primary); background: rgba(56, 189, 248, 0.15); }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark); z-index: 2000;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .overlay-nav { display: flex; flex-direction: column; gap: 40px; text-align: center; }
+        .overlay-nav a { color: var(--text-muted); text-decoration: none; font-size: 2.5rem; font-weight: bold; transition: 0.4s; }
+        .overlay-nav a:hover { color: var(--primary); }
+
+        /* --- 內容區域 --- */
+        .container { max-width: 900px; margin: 150px auto; padding: 0 5%; }
+        h2 { font-size: 3.5rem; font-weight: 800; margin-bottom: 45px; }
+        .job-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .card { background: var(--surface); padding: 40px; border-radius: 20px; border-left: 6px solid var(--primary); backdrop-filter: blur(5px); }
+        .card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.4rem; }
+        .job-visual { width: 100%; height: 300px; border-radius: 20px; margin-top: 35px; background: url('/static/job_photo.jpg') center/cover; opacity: 0.7; border: 1px solid rgba(255,255,255,0.1); }
+
+        @media (max-width: 768px) { .job-grid { grid-template-columns: 1fr; } h2 { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+    <header><div class="current-page">職務研究 / MIS ROLE</div></header>
+    <div class="menu-toggle" onclick="toggleMenu()">選單 ☰</div>
+    
+    <div id="navOverlay" class="overlay">
+        <div style="position: absolute; top: 40px; right: 50px; cursor: pointer;" onclick="toggleMenu()">關閉 ✕</div>
+        <nav class="overlay-nav">
+            <a href="/">個人簡介</a>
+            <a href="/test">特質分析</a>
+            <a href="/job">職務研究</a>
+            <a href="/resume">實戰作品</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <span style="color:var(--primary); font-weight:bold; letter-spacing:2px;">CAREER ROLE</span>
+        <h2>MIS 系統工程師分析</h2>
+        <div class="job-grid">
+            <div class="card">
+                <h3>維運與管理</h3>
+                <p>負責企業內部的伺服器與網路架構，這需要對系統細節的高度專注，與我在 Python 程式開發中培養的邏輯思維不謀而合。</p>
+            </div>
+            <div class="card">
+                <h3>溝通與協作</h3>
+                <p>作為資訊端與使用端的橋樑，我將運用社會型特質，協助同仁排除障礙，並優化企業運作流程。</p>
+            </div>
+        </div>
+        <div class="job-visual"></div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const overlay = document.getElementById('navOverlay');
+            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
