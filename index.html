@@ -41,7 +41,7 @@
 
         .animate-in {
             animation: fadeInUp 0.8s ease-out forwards;
-            opacity: 0; /* 初始隱藏 */
+            opacity: 0;
         }
 
         .delay-1 { animation-delay: 0.2s; }
@@ -142,43 +142,53 @@
         @media (max-width: 1024px) {
             header {
                 padding: 0 20px;
+                height: 70px;
             }
             .current-page {
                 font-size: 0.7rem;
-                max-width: 60%; /* 防止文字碰到右邊 MENU */
+                max-width: 60%; /* 限制寬度防止撞到 MENU */
                 line-height: 1.2;
+                letter-spacing: 1px;
             }
             .menu-toggle {
+                top: 15px;
                 right: 20px;
                 padding: 8px 16px;
                 font-size: 0.8rem;
             }
+            .container { padding: 100px 5% 40px; }
+            
             .hero-section { 
                 flex-direction: column; 
                 text-align: center; 
                 gap: 30px;
+                margin-bottom: 50px;
             }
-            .hero-text {
-                order: 1;
-            }
+            .hero-text { order: 1; }
+            
+            /* 強制顯示照片容器並調整大小 */
             .hero-image { 
-                display: flex !important; /* 強制顯示照片 */
+                display: flex !important; 
                 justify-content: center;
                 order: 2;
                 width: 100%;
                 flex: none;
+                perspective: none;
             }
             .photo-frame {
-                width: 220px; /* 手機版縮小照片 */
+                width: 220px; /* 手機版縮小尺寸 */
                 height: 280px;
                 margin: 0 auto;
+                border-radius: 20px;
             }
+            .photo-frame:hover { transform: none; } /* 手機版取消旋轉特效避免閃爍 */
+
             .sub-grid { grid-template-columns: 1fr; }
             .info-item { justify-content: center; }
-            .hero-desc { margin: 0 auto; border-left: none; border-top: 3px solid var(--primary); padding-top: 20px; }
+            .hero-desc { margin: 0 auto; border-left: none; border-top: 3px solid var(--primary); padding: 20px 0 0 0; }
             
             h1 { font-size: 3rem; }
-            .container { padding-top: 100px; }
+            h2 { letter-spacing: 3px; font-size: 1rem; }
         }
     </style>
 </head>
