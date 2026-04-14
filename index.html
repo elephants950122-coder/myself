@@ -93,7 +93,8 @@
         .hero-image { flex: 0.8; display: flex; justify-content: flex-end; perspective: 1000px; }
         .photo-frame {
             width: 360px; height: 480px; border-radius: 30px;
-            background: url('static/me.jpg') center/cover no-repeat;
+            background-image: url('static/me.jpg'); 
+            background-size: cover; background-position: center top;
             box-shadow: 0 50px 100px rgba(0,0,0,0.6); border: 1px solid var(--border-glow);
             transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
