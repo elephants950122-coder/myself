@@ -3,54 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>實戰作品 | 林建宇</title>
+    <title>求職履歷與作品 | 林建宇</title>
     <style>
-        /* 樣式保持一致性 */
-        :root { --bg-dark: #0f111a; --bg-gradient: radial-gradient(circle at top right, #1e2235 0%, #0f111a 100%); --surface: rgba(255, 255, 255, 0.04); --primary: #38bdf8; --text-main: #f8fafc; --text-muted: #94a3b8; --accent-border: rgba(255, 255, 255, 0.15); }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background: var(--bg-gradient); color: var(--text-main); line-height: 1.6; }
-        header { position: fixed; top: 0; left: 0; width: 100%; height: 80px; background: rgba(15,17,26,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--accent-border); display: flex; align-items: center; padding: 0 50px; z-index: 1000; }
-        .current-page { font-size: 0.85rem; color: var(--primary); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+        :root {
+            --bg-dark: #0f111a; 
+            --bg-gradient: radial-gradient(circle at 50% 50%, #1e2235 0%, #0f111a 100%);
+            --surface: rgba(255, 255, 255, 0.04);
+            --surface-hover: rgba(255, 255, 255, 0.06);
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.3);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(255, 255, 255, 0.08);
+            --accent: #818cf8;
+            --award: #fbbf24;
+        }
 
-        .menu-toggle { position: fixed; top: 15px; right: 50px; z-index: 2001; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 10px 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; background: rgba(255,255,255,0.08); backdrop-filter: blur(15px); transition: 0.3s; color: var(--text-main); }
-        .menu-toggle:hover { border-color: var(--primary); background: rgba(56, 189, 248, 0.15); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'PingFang TC', '微軟正黑體', sans-serif; }
+        
+        body { 
+            background: var(--bg-gradient); background-attachment: fixed;
+            color: var(--text-main); min-height: 100vh; overflow-x: hidden; line-height: 1.6;
+        }
 
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 2000; display: none; flex-direction: column; justify-content: center; align-items: center; }
+        body::before {
+            content: ""; position: absolute; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--border-glow) 1px, transparent 0);
+            background-size: 40px 40px; opacity: 0.2; pointer-events: none; z-index: -1;
+        }
+
+        /* --- 動畫定義 --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
+            background: rgba(15, 17, 26, 0.7); backdrop-filter: blur(20px); 
+            border-bottom: 1px solid var(--border-glow); display: flex; align-items: center; padding: 0 50px; z-index: 1000; 
+        }
+        .current-page { font-size: 0.85rem; color: var(--primary); font-weight: bold; letter-spacing: 3px; text-transform: uppercase; }
+
+        .menu-toggle {
+            position: fixed; top: 18px; right: 50px; z-index: 3000;
+            cursor: pointer; display: flex; align-items: center; gap: 12px;
+            padding: 10px 24px; border: 1px solid var(--border-glow); border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); 
+            transition: 0.3s; color: var(--text-main); font-weight: bold;
+        }
+        .menu-toggle:hover { border-color: var(--primary); background: var(--primary-glow); transform: translateY(-2px); }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 17, 26, 0.98); z-index: 2000; display: none; flex-direction: column; justify-content: center; align-items: center;
+        }
         .overlay-nav { display: flex; flex-direction: column; gap: 40px; text-align: center; }
-        .overlay-nav a { color: var(--text-muted); text-decoration: none; font-size: 2.5rem; font-weight: bold; transition: 0.4s; }
+        .overlay-nav a { color: var(--text-muted); text-decoration: none; font-size: 2.5rem; font-weight: 900; transition: 0.4s; }
         .overlay-nav a:hover { color: var(--primary); transform: scale(1.1); }
 
-        .container { max-width: 900px; margin: 160px auto; padding: 0 5%; }
-        h2 { font-size: 3.5rem; font-weight: 900; text-align: center; margin-bottom: 60px; }
-        .card { background: var(--surface); padding: 40px; border-radius: 32px; border: 1px solid var(--accent-border); margin-bottom: 40px; }
+        .container { max-width: 1050px; margin: 0 auto; padding: 130px 5% 40px; }
+        
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-tag { color: var(--primary); font-weight: 600; letter-spacing: 4px; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 0; }
+
+        .resume-snapshot {
+            display: grid; grid-template-columns: 320px 1fr; gap: 30px; margin-bottom: 60px;
+        }
+        .profile-sidebar {
+            background: var(--surface); border: 1px solid var(--border-glow); border-radius: 28px;
+            padding: 40px 30px; text-align: center; backdrop-filter: blur(10px); display: flex; flex-direction: column;
+        }
+        .profile-img-placeholder {
+            width: 170px; height: 180px; border-radius: 24px; margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--surface), rgba(56, 189, 248, 0.1));
+            border: 2px solid rgba(56, 189, 248, 0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background-image: url('/static/me.jpg'); 
+            background-size: cover; background-position: center top; 
+        }
+        .profile-name { font-size: 1.8rem; font-weight: 900; color: var(--text-main); margin-bottom: 5px; }
+        .profile-en-name { font-size: 0.9rem; color: var(--primary); letter-spacing: 2px; margin-bottom: 10px; }
+        
+        .profile-summary {
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin: 15px 0;
+            padding: 15px; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);
+            text-align: left;
+        }
+
+        .contact-info { text-align: left; margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; }
+        .contact-item { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .contact-item i { color: var(--primary); }
+        .contact-link { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+        .contact-link:hover { color: var(--primary); }
+
+        .skills-main {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(15, 17, 26, 0.6));
+            border: 1px solid var(--border-glow); border-radius: 28px; padding: 45px 40px;
+        }
+        .target-job-box { margin-bottom: 35px; }
+        .target-job-box h3 { font-size: 1.1rem; color: var(--text-muted); font-weight: normal; margin-bottom: 8px; }
+        .target-job-box h2 { font-size: 2rem; color: var(--primary); font-weight: 900; }
+        
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .skill-group h4 { color: var(--text-main); margin-bottom: 5px; font-size: 1.1rem; }
+        .skill-note { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px; border-bottom: 1px solid var(--border-glow); padding-bottom: 10px; opacity: 0.7; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag { background: rgba(255,255,255,0.03); padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.08); color: var(--text-muted); }
+        .skill-tag.highlight { background: rgba(56, 189, 248, 0.08); border-color: rgba(56, 189, 248, 0.3); color: var(--text-main); }
+
+        .project-card {
+            background: linear-gradient(180deg, var(--surface) 0%, rgba(15,17,26,0.5) 100%);
+            border: 1px solid var(--border-glow); border-radius: 28px; padding: 50px;
+            position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); margin-bottom: 60px;
+            transition: 0.3s;
+        }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .project-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+        
+        .project-header { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 30px; }
+        .project-logo {
+            width: 150px; height: 150px; border-radius: 24px; object-fit: contain; 
+            border: 1px solid rgba(255,255,255,0.1); background: #fff; padding: 5px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4); flex-shrink: 0;
+        }
+        .project-header-info { flex: 1; }
+
+        .project-title { font-size: 2.2rem; color: var(--text-main); font-weight: 900; line-height: 1.3; margin-bottom: 12px; }
+        .award-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); color: var(--award); padding: 6px 14px; border-radius: 50px; font-weight: 800; font-size: 0.85rem; margin-bottom: 15px; }
+        .project-meta { display: flex; gap: 20px; align-items: center; color: var(--text-muted); font-size: 0.95rem; flex-wrap: wrap; }
+        .meta-item i { color: var(--primary); font-style: normal; }
+        
+        .btn-group { display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+        .btn-primary { padding: 10px 20px; background: var(--primary); color: var(--bg-dark); border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;}
+        .btn-primary:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px var(--primary-glow); }
+        .btn-outline { padding: 10px 20px; border: 1px solid var(--primary); color: var(--primary); border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;}
+        .btn-outline:hover { background: var(--primary); color: var(--bg-dark); transform: translateY(-3px); box-shadow: 0 10px 20px var(--primary-glow); }
+
+        .tech-tags { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .tech-tag { padding: 8px 18px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; font-size: 0.9rem; color: var(--primary); font-weight: bold; }
+        .project-body { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .desc-block { background: rgba(255,255,255,0.01); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.03); }
+        .desc-title { color: var(--primary); font-size: 1.2rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .desc-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .desc-list li { position: relative; padding-left: 22px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+        .desc-list li::before { content: "▹"; position: absolute; left: 0; color: var(--primary); font-weight: bold; font-size: 1.2rem; line-height: 1.4; }
+        .desc-list strong { color: var(--text-main); font-weight: 700; }
+        .summary-block { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(129, 140, 248, 0.05), transparent); padding: 35px; border-radius: 20px; border: 1px solid rgba(129, 140, 248, 0.15); margin-top: 10px; }
+        .summary-title { color: var(--accent); font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .summary-text { color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+
+        .future-plan-section { margin-top: 40px; }
+        .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .plan-card { background: var(--surface); border: 1px solid var(--border-glow); border-radius: 24px; padding: 40px 30px; text-align: center; transition: 0.3s; }
+        .plan-card:hover { transform: translateY(-5px); border-color: var(--primary); background: var(--surface-hover); }
+        .plan-icon { font-size: 2.8rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--primary-glow)); }
+        .plan-phase { color: var(--primary); font-size: 0.85rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
+        .plan-title { font-size: 1.2rem; color: var(--text-main); font-weight: bold; margin-bottom: 15px; }
+        .plan-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; text-align: left; }
+
+        footer { text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid var(--border-glow); color: var(--text-muted); font-size: 0.85rem; letter-spacing: 1px; line-height: 1.8; }
+
+        @media (max-width: 900px) {
+            .resume-snapshot { grid-template-columns: 1fr; }
+            .project-header { flex-direction: column; align-items: center; text-align: center; }
+            .project-meta, .btn-group { justify-content: center; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .project-body { grid-template-columns: 1fr; }
+            .plan-grid { grid-template-columns: 1fr; }
+            .project-card { padding: 30px; }
+        }
     </style>
 </head>
 <body>
-    <header><div class="current-page">WORKS / 實戰作品</div></header>
-    <div class="menu-toggle" onclick="toggleMenu()">MENU ☰</div>
+    <header><div class="current-page">RESUME / 求職履歷與作品</div></header>
+    
+    <div id="menuBtn" class="menu-toggle" onclick="toggleMenu()">MENU ☰</div>
+    
     <div id="navOverlay" class="overlay">
-        <div style="position: absolute; top: 30px; right: 50px; cursor: pointer; font-size: 1.5rem; color: #fff;" onclick="toggleMenu()">✕</div>
         <nav class="overlay-nav">
             <a href="/">個人簡介</a>
             <a href="/test">職涯測驗結果</a>
-            <a href="/job">職務研究</a>
-            <a href="/resume">實戰作品</a>
+            <a href="/job">MIS相關工作介紹</a>
+            <a href="/resume">求職履歷與作品</a>
         </nav>
     </div>
 
     <div class="container">
-        <h2>代表專案</h2>
-        <div class="card">
-            <h3 style="color: var(--primary);">瑪利亞烘焙預訂 APP</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">2025.12 | 系統開發專案</p>
-            <p>使用 MVVM 架構與 Firebase 雲端資料庫，開發具備購物車與訂單管理功能的移動端應用程式。</p>
+        <div class="resume-snapshot animate-in">
+            <div class="profile-sidebar">
+                <div class="profile-img-placeholder"></div>
+                <div class="profile-name">林建宇</div>
+                <div class="profile-en-name">LIN, CHIEN-YU</div>
+                
+                <div class="profile-summary">
+                    結合細膩的觀察力與紮實的程式邏輯，擅長跨部門溝通與專案執行。致力於開發能解決真實痛點的數位解決方案。
+                </div>
+                
+                <div class="contact-info">
+                    <div style="font-size: 0.9rem; color: var(--text-main); font-weight: bold; margin-bottom: 10px;">靜宜大學 資訊管理學系</div>
+                    <div class="contact-item"><i>🎓</i> 大二在學生 (預計 2028 畢業)</div>
+                    <div class="contact-item"><i>📧</i> <a href="mailto:s1130311@o365st.pu.edu.tw" class="contact-link">s1130311@o365st.pu.edu.tw</a></div>
+                </div>
+            </div>
+
+            <div class="skills-main">
+                <div class="target-job-box">
+                    <h3>應徵職務目標 (Target Role)</h3>
+                    <h2>企業內部系統開發 / <br>資安管理工程師</h2>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-group">
+                        <h4>💻 基礎技術與接觸領域</h4>
+                        <div class="skill-note">※ 具備課堂基礎與專案初階實作經驗</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag highlight">Kotlin</span>
+                            <span class="skill-tag highlight">Java</span>
+                            <span class="skill-tag highlight">Firebase</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C/C++</span>
+                            <span class="skill-tag highlight">MVVM 軟體架構</span>
+                            <span class="skill-tag">HTML/CSS</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <h4>🗣️ 軟實力與個人特質</h4>
+                        <div class="skill-note">※ 透過系學會與系籃隊長經驗累積</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag highlight">跨部門溝通協調</span>
+                            <span class="skill-tag highlight">需求訪談與轉譯</span>
+                            <span class="skill-tag">團隊整合領導力</span>
+                            <span class="skill-tag highlight">高壓環境抗壓性</span>
+                            <span class="skill-tag">專案流程控管</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section-header animate-in" style="margin-top: 80px;">
+            <span class="section-tag">Portfolio & Case Study</span>
+            <h2>實戰專案經歷</h2>
+        </div>
+
+        <div class="project-card animate-in delay-1">
+            <div class="project-header">
+                <img src="/static/App logo.jpg" alt="Maria Time Logo" class="project-logo" onerror="this.style.display='none'">
+                
+                <div class="project-header-info">
+                    <div class="award-badge">🏆 期末 App 競賽 第二名</div>
+                    <h3 class="project-title">Maria Time<br> 智慧預約與友善生產管理系統</h3>
+                    <div class="project-meta">
+                        <span class="meta-item"><i>📅</i> 2025 年 12 月完成</span>
+                        <span class="meta-item"><i>📚</i> 靜宜資管「行動應用軟體開發」產學合作專案</span>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <a href="https://www.youtube.com/watch?v=Q18hnogVMok" target="_blank" class="btn-primary">▶ 觀看 Demo 影片</a>
+                        <a href="https://github.com/elephants950122-coder/Maria.app20251221.git" target="_blank" class="btn-outline">💻 GitHub 原始碼</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-tags">
+                <span class="tech-tag">Android Studio (Kotlin)</span>
+                <span class="tech-tag">MVVM 軟體架構</span>
+                <span class="tech-tag">Firebase Firestore</span>
+                <span class="tech-tag">Github 團隊協作</span>
+            </div>
+
+            <div class="project-body">
+                <div class="desc-block">
+                    <div class="desc-title">🎯 雙向痛點解決與 UX 設計</div>
+                    <ul class="desc-list">
+                        <li><strong>真實場域提案：</strong>為瑪利MAMA手作麵包量身打造數位輔具，取代傳統 LINE 群組人工接單的高錯率與高成本。</li>
+                        <li><strong>顧客端 (時段預約鎖定)：</strong>系統依據產能設定時段上限，額滿自動反灰。實現強制分流，減少顧客等待時間。</li>
+                        <li><strong>員工端 (認知友善設計)：</strong>針對庇護工場員工特性，改採<strong>「時段區塊化看板」</strong>與<strong>「數據圖塊化」</strong>，降低心智障礙員工多工處理的焦慮感。</li>
+                    </ul>
+                </div>
+
+                <div class="desc-block">
+                    <div class="desc-title">💻 技術實作與系統架構</div>
+                    <ul class="desc-list">
+                        <li><strong>原生 Android 開發：</strong>使用 <strong>Kotlin</strong> 撰寫，並落實 <strong>MVVM 架構</strong>，將介面(View)與資料(Model)分離，提升協作效率。</li>
+                        <li><strong>防超賣機制：</strong>串接 <strong>Firebase Firestore</strong> 確保多人同時下單時不會發生超賣，實現精準產能控管。</li>
+                        <li><strong>自動化通知：</strong>克服邏輯與 API 串接瓶頸，成功實作下單與出餐完成的 Email 自動通知機制。</li>
+                    </ul>
+                </div>
+
+                <div class="summary-block">
+                    <div class="summary-title">💡 業界驗證與個人反思</div>
+                    <p class="summary-text">
+                        從對 Kotlin 語法感到陌生，到能熟練運用 Android Studio 與 GitHub 協作，整個過程帶來了極大成就感。 我們的「產能導向」結合「認知友善」系統設計，獲得了現場評審——<strong>授課教授 楊子青老師</strong>與<strong>瑪利亞基金會雲端發展室 林浩棟主任</strong>的青睞並榮獲第二名。 這次專案讓我深刻體會，工程師不僅要會寫代碼，更要具備同理心，將技術轉化為解決真實痛點的數位輔具。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section-header animate-in" style="margin-top: 80px;">
+            <span class="section-tag">Career Roadmap</span>
+            <h2>未來職涯規劃與自我充實</h2>
+        </div>
+
+        <div class="future-plan-section animate-in delay-2">
+            <div class="plan-grid">
+                <div class="plan-card">
+                    <div class="plan-icon">📚</div>
+                    <div class="plan-phase">Short-Term (在校期間)</div>
+                    <div class="plan-title">深耕基礎與專案累積</div>
+                    <p class="plan-desc">
+                        作為大二學生，首要目標是扎實本科基礎知識，並持續精進前後端開發技術。 計畫透過參與更多的課堂與跨系產學專案，將所學轉化為實體作品，並藉由系學會副會長的經驗，精進技術團隊的管理與溝通。
+                    </p>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-icon">💼</div>
+                    <div class="plan-phase">Mid-Term (大三至大四)</div>
+                    <div class="plan-title">企業實習與實戰磨練</div>
+                    <p class="plan-desc">
+                        不盲目追求紙本證照，而是期望進入真實職場環境。計畫於高年級時尋求企業內部 MIS 或系統開發相關的實習機會，提前了解企業資訊系統的運作流程，並學習如何在壓力下解決跨部門的系統需求痛點。
+                    </p>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-icon">🚀</div>
+                    <div class="plan-phase">Long-Term (畢業後 1-3 年)</div>
+                    <div class="plan-title">能獨立作業的系統工程師</div>
+                    <p class="plan-desc">
+                        期望在進入職場後，能迅速熟悉企業 IT 基礎架構，具備獨立維護與開發系統的能力。 長期目標是成為一位既懂底層技術邏輯，又擁有商業思維與溝通手腕的跨領域科技人才，為企業帶來實質的營運效益。
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
+    <footer>
+        &copy; 2026 林建宇 LIN, CHIEN-YU. All Rights Reserved. <br>
+        靜宜大學 資訊管理學系 資訊管理導論個人作業
+    </footer>
+
     <script>
-        function toggleMenu() {
-            const overlay = document.getElementById('navOverlay');
-            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
+        function toggleMenu() { 
+            const o = document.getElementById('navOverlay'); 
+            const btn = document.getElementById('menuBtn');
+            
+            if (o.style.display === 'flex') {
+                o.style.display = 'none';
+                btn.innerHTML = 'MENU ☰';
+            } else {
+                o.style.display = 'flex';
+                btn.innerHTML = 'CLOSE ✕';
+            }
         }
     </script>
 </body>

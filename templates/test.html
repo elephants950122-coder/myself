@@ -19,31 +19,38 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'PingFang TC', '微軟正黑體', sans-serif; }
         
         body { 
-            background: var(--bg-gradient); 
-            background-attachment: fixed; 
-            color: var(--text-main); 
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: var(--bg-gradient); background-attachment: fixed; 
+            color: var(--text-main); line-height: 1.6; overflow-x: hidden;
         }
+
+        /* --- 動畫定義 --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
 
         header {
             position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
             background: rgba(15, 17, 26, 0.8); backdrop-filter: blur(20px); 
-            border-bottom: 1px solid var(--accent-border); 
-            display: flex; align-items: center; padding: 0 50px; z-index: 1000; 
+            border-bottom: 1px solid var(--accent-border); display: flex; align-items: center; padding: 0 50px; z-index: 1000; 
         }
-        .current-page { 
-            font-size: 0.85rem; color: var(--primary); font-weight: 700; 
-            letter-spacing: 3px; text-transform: uppercase;
-        }
+        .current-page { font-size: 0.85rem; color: var(--primary); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* --- 選單按鈕 --- */
         .menu-toggle {
-            position: fixed; top: 15px; right: 50px; z-index: 2001;
+            position: fixed; top: 15px; right: 50px; z-index: 3000;
             cursor: pointer; display: flex; align-items: center; gap: 12px;
             padding: 10px 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50px;
             background: rgba(255,255,255,0.08); backdrop-filter: blur(15px);
-            transition: 0.3s; color: var(--text-main);
+            transition: 0.3s; color: var(--text-main); font-weight: bold;
         }
         .menu-toggle:hover { border-color: var(--primary); background: rgba(56, 189, 248, 0.15); }
 
@@ -56,19 +63,15 @@
         .overlay-nav a { color: var(--text-muted); text-decoration: none; font-size: 2.5rem; font-weight: bold; transition: 0.4s; }
         .overlay-nav a:hover { color: var(--primary); transform: scale(1.1); }
 
-        .container { max-width: 900px; margin: 160px auto; padding: 0 5%; }
+        .container { max-width: 900px; margin: 160px auto 0; padding: 0 5%; }
         
         .section-header { text-align: center; margin-bottom: 80px; }
         .section-tag { color: var(--primary); font-weight: 600; letter-spacing: 4px; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 15px; display: block; }
         h2 { font-size: 3.5rem; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 20px; }
 
         .card { 
-            background: var(--surface); 
-            padding: 50px; 
-            border-radius: 32px; 
-            border: 1px solid var(--accent-border); 
-            margin-bottom: 50px; 
-            backdrop-filter: blur(12px);
+            background: var(--surface); padding: 50px; border-radius: 32px; 
+            border: 1px solid var(--accent-border); margin-bottom: 50px; backdrop-filter: blur(12px);
         }
         
         .card h3 { 
@@ -79,28 +82,28 @@
         .card p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px; }
 
         .visual-container {
-            width: 100%; 
-            height: auto; 
-            border-radius: 20px; 
-            overflow: hidden;
-            border: 1px solid var(--accent-border); 
-            background: #ffffff; 
-            margin: 30px 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            width: 100%; height: auto; border-radius: 20px; overflow: hidden;
+            border: 1px solid var(--accent-border); background: #ffffff; 
+            margin: 30px 0 10px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
         .visual-container img { width: 100%; height: auto; display: block; }
+        
+        .insight-tags { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .tag { font-size: 0.8rem; background: rgba(56, 189, 248, 0.1); color: var(--primary); padding: 4px 12px; border-radius: 50px; border: 1px solid rgba(56, 189, 248, 0.2); font-weight: bold; }
 
         .trait-list { display: flex; flex-direction: column; gap: 20px; }
         .trait-item { 
-            background: rgba(255,255,255,0.02); 
-            padding: 25px; 
-            border-radius: 18px; 
-            border-left: 4px solid var(--primary);
+            background: rgba(255,255,255,0.02); padding: 25px; border-radius: 18px; border-left: 4px solid var(--primary);
+            transition: 0.3s;
         }
+        .trait-item:hover { background: rgba(255,255,255,0.05); transform: translateX(10px); }
         .trait-title { color: var(--text-main); font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; display: block; }
         .trait-desc { color: var(--text-muted); font-size: 0.95rem; }
 
-        .footer-cta { text-align: center; padding-bottom: 120px; }
+        .summary-box { background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), transparent); border: 1px solid var(--primary-glow); padding: 40px; border-radius: 24px; margin-top: 20px; }
+        .summary-box h4 { color: var(--primary); font-size: 1.4rem; margin-bottom: 15px; }
+
+        .footer-cta { text-align: center; padding-bottom: 60px; padding-top: 20px;}
         .btn-link {
             display: inline-flex; align-items: center; gap: 10px;
             padding: 15px 35px; border: 1px solid var(--primary);
@@ -108,6 +111,13 @@
             font-weight: 700; transition: all 0.3s ease;
         }
         .btn-link:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 0 20px var(--primary-glow); }
+
+        /* --- 頁尾 Footer --- */
+        footer { 
+            text-align: center; padding: 40px 20px; margin-top: 60px; 
+            border-top: 1px solid var(--accent-border); color: var(--text-muted); 
+            font-size: 0.85rem; letter-spacing: 1px; line-height: 1.8;
+        }
 
         @media (max-width: 768px) {
             h2 { font-size: 2.5rem; }
@@ -119,37 +129,43 @@
 
     <header><div class="current-page">RESULT / 職涯測驗結果</div></header>
 
-    <div class="menu-toggle" onclick="toggleMenu()">MENU ☰</div>
+    <div id="menuBtn" class="menu-toggle" onclick="toggleMenu()">MENU ☰</div>
 
     <div id="navOverlay" class="overlay">
-        <div style="position: absolute; top: 30px; right: 50px; cursor: pointer; font-size: 1.5rem; color: #fff;" onclick="toggleMenu()">✕</div>
         <nav class="overlay-nav">
             <a href="/">個人簡介</a>
             <a href="/test">職涯測驗結果</a>
-            <a href="/job">職務研究</a>
-            <a href="/resume">實戰作品</a>
+            <a href="/job">MIS相關工作介紹</a>
+            <a href="/resume">求職履歷與作品</a>
         </nav>
     </div>
 
     <div class="container">
-        <div class="section-header">
+        <div class="section-header animate-in">
             <span class="section-tag">UCAN Diagnostic</span>
             <h2>職涯測驗診斷報告</h2>
         </div>
         
-        <div class="card">
+        <div class="card animate-in delay-1">
             <h3>職涯類型興趣強度</h3>
-            <p>診斷數據顯示，我在「建築營造」與「醫療保健」領域具備極高的興趣強度 (PR 99)，同時在「資訊科技」專業領域也有顯著的高分表現。</p>
+            <p>診斷數據顯示，我在「建築營造」與「醫療保健」領域具備 PR 99 的極高興趣強度，同時在「資訊科技」專業領域也有顯著的高分表現。</p>
             
             <div class="visual-container">
                 <img src="{{ url_for('static', filename='ucan_chart-3.png') }}" alt="16職涯類型分析-1">
             </div>
+            <div class="insight-tags">
+                <span class="tag"># 建築營造 PR 99</span> <span class="tag"># 醫療保健 PR 99</span> <span class="tag"># 資訊科技核心</span>
+            </div>
+
             <div class="visual-container">
                 <img src="{{ url_for('static', filename='ucan_chart-4.png') }}" alt="16職涯類型分析-2">
             </div>
+            <div class="insight-tags">
+                <span class="tag"># 數據導向</span> <span class="tag"># 實作導向</span>
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card animate-in delay-2">
             <h3>職業性格傾向</h3>
             <p>透過診斷剖面圖，可以清楚觀察到我在事務處理（C）與實作面（R）的性格優勢。</p>
             <div class="visual-container">
@@ -157,9 +173,9 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card animate-in delay-3">
             <h3>性格代碼解析：CRS</h3>
-            <p>我的核心性格代碼為 <strong>CRS</strong>，以下為結合 UCAN 診斷圖表之詳細性格組成說明：</p>
+            <p>我的核心性格代碼為 <strong>CRS</strong>，結合診斷數據，展現出「嚴謹、實幹、善溝通」的跨領域特質：</p>
             
             <div class="visual-container">
                 <img src="{{ url_for('static', filename='ucan_chart-2.png') }}" alt="CRS 性格細節圖">
@@ -167,30 +183,49 @@
 
             <div class="trait-list">
                 <div class="trait-item">
-                    <span class="trait-title">C 事務型 (Conventional)</span>
-                    <p class="trait-desc">重視精確度與組織規範，擅長處理數據與繁瑣資料，能在系統化的環境下穩定產出。</p>
+                    <span class="trait-title">C 事務型 (Conventional) — 系統化的組織者</span>
+                    <p class="trait-desc">重視精確度與規範，這使我在面對複雜的數據彙整或系統化管理環境時，能維持極高的產出品質與穩定度。</p>
                 </div>
                 <div class="trait-item">
-                    <span class="trait-title">R 實用型 (Realistic)</span>
-                    <p class="trait-desc">偏好具體、實際的操作與技術性工作，具備強大的實作力與穩健解決問題的態度。</p>
+                    <span class="trait-title">R 實用型 (Realistic) — 務實的技術開發者</span>
+                    <p class="trait-desc">偏好具體的操作與技術性工作，具備強大的實作力，能將技術轉化為如「Maria Time」般解決痛點的具體輔具。</p>
                 </div>
                 <div class="trait-item">
-                    <span class="trait-title">S 社會型 (Social)</span>
-                    <p class="trait-desc">親切和善、關心他人感受，在團隊中具備良好的溝通彈性，是值得信賴的協作夥伴。</p>
+                    <span class="trait-title">S 社會型 (Social) — 溫暖的溝通者</span>
+                    <p class="trait-desc">關心他人感受並具備良好的溝通彈性，結合資管系的專業，我能成為技術團隊與使用者之間最佳的橋樑。</p>
                 </div>
+            </div>
+
+            <div class="summary-box">
+                <h4>📌 測驗總結</h4>
+                <p style="font-size: 1rem; color: var(--text-muted);">
+                    測驗結果高度契合我的職涯目標。高強度的 <strong>C 與 R 性格</strong> 是擔任系統管理工程師的核心基石，而 <strong>S 性格</strong> 則賦予我從使用者角度思考的能力，這點在產學專案的「認知友善設計」中已得到實務驗證。
+                </p>
             </div>
         </div>
 
-        <div class="footer-cta">
+        <div class="footer-cta animate-in delay-3">
             <p style="color: var(--text-muted); margin-bottom: 20px;">數據來源：大專校院就業職能平台 (UCAN)</p>
             <a href="https://ucan.moe.edu.tw/" target="_blank" class="btn-link">前往官方平台 ↗</a>
         </div>
     </div>
 
+    <footer>
+        &copy; 2026 林建宇 LIN, CHIEN-YU. All Rights Reserved. <br>
+        靜宜大學 資訊管理學系 資訊管理導論個人作業
+    </footer>
+
     <script>
-        function toggleMenu() {
-            const overlay = document.getElementById('navOverlay');
-            overlay.style.display = (overlay.style.display === 'flex') ? 'none' : 'flex';
+        function toggleMenu() { 
+            const o = document.getElementById('navOverlay'); 
+            const btn = document.getElementById('menuBtn');
+            if (o.style.display === 'flex') {
+                o.style.display = 'none';
+                btn.innerHTML = 'MENU ☰';
+            } else {
+                o.style.display = 'flex';
+                btn.innerHTML = 'CLOSE ✕';
+            }
         }
     </script>
 </body>
