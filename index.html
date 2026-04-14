@@ -91,18 +91,19 @@
         }
 
         .hero-image { flex: 0.8; display: flex; justify-content: flex-end; perspective: 1000px; }
-        
-        /* 核心修正：將 .photo-frame 改為圖片容器 */
+
+        /* 核心修正：將 .photo-frame 改為圖片容器，並確保 Vercel 能渲染 */
         .photo-frame {
             width: 360px; height: 480px; border-radius: 30px;
             box-shadow: 0 50px 100px rgba(0,0,0,0.6); border: 1px solid var(--border-glow);
             transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            overflow: hidden; /* 確保圖片不超出圓角 */
+            overflow: hidden;
+            background-color: rgba(255,255,255,0.02); /* 預佔位底色 */
         }
         .photo-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 確保照片填滿且不變形 */
+            object-fit: cover; /* 確保照片填滿框架不變形 */
             display: block;
         }
         .photo-frame:hover { transform: rotateY(-10deg) rotateX(5deg) translateY(-10px); border-color: var(--primary); box-shadow: 0 60px 120px rgba(56, 189, 248, 0.2); }
@@ -140,32 +141,32 @@
             font-size: 0.85rem; letter-spacing: 1px; line-height: 1.8;
         }
 
-        /* --- 比例感應 RWD 最終方案 --- */
+        /* --- 比例感應 RWD 優化方案 --- */
         @media (max-width: 1024px) {
             header {
                 height: clamp(60px, 10vh, 80px);
                 padding: 0 5%;
             }
             .current-page {
-                font-size: clamp(0.6rem, 2vw, 0.8rem);
-                max-width: 55%;
+                font-size: clamp(0.65rem, 2vw, 0.8rem);
+                max-width: 55%; 
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
             .menu-toggle {
                 right: 5%;
-                padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 24px);
-                font-size: clamp(0.7rem, 2vw, 0.9rem);
+                padding: clamp(8px, 1.5vw, 10px) clamp(14px, 3vw, 24px);
+                font-size: clamp(0.75rem, 2vw, 0.85rem);
             }
             .container { 
-                padding: clamp(80px, 12vh, 120px) 5% 40px; 
+                padding: clamp(90px, 12vh, 120px) 5% 40px; 
             }
             
             .hero-section { 
-                flex-direction: column-reverse; 
+                flex-direction: column-reverse; /* 照片在文字下方 */
                 text-align: center; 
-                gap: 5vh;
+                gap: 4vh;
             }
             
             .hero-image { 
@@ -174,25 +175,27 @@
                 justify-content: center;
                 flex: none;
                 perspective: none;
+                visibility: visible !important;
+                opacity: 1 !important;
             }
             
             .photo-frame {
-                width: 60vw;
-                max-width: 300px;
-                aspect-ratio: 3/4;
-                height: auto;
+                width: 60vw !important;
+                max-width: 280px;
+                aspect-ratio: 3/4; 
+                height: auto !important;
                 margin: 0 auto;
-                border-radius: 10%;
-                box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+                border-radius: 20px;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             }
-            .photo-frame:hover { transform: translateY(-5px); }
+            .photo-frame:hover { transform: none; } 
 
-            h1 { font-size: clamp(2.5rem, 10vw, 4.8rem); }
-            h2 { font-size: clamp(0.9rem, 3vw, 1.2rem); letter-spacing: 2px; }
+            h1 { font-size: clamp(2.8rem, 12vw, 4.8rem); }
+            h2 { font-size: clamp(1rem, 3.5vw, 1.2rem); letter-spacing: 2px; }
             
             .sub-grid { grid-template-columns: 1fr; }
-            .hero-desc { padding: 20px; border-left: none; border-top: 2px solid var(--primary); }
-            .info-item { justify-content: center; font-size: clamp(0.8rem, 2.5vw, 1rem); }
+            .hero-desc { padding: 25px; border-left: none; border-top: 3px solid var(--primary); }
+            .info-item { justify-content: center; font-size: clamp(0.85rem, 2.8vw, 1rem); }
         }
     </style>
 </head>
