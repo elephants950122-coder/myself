@@ -16,6 +16,7 @@
             --border-glow: rgba(255, 255, 255, 0.08);
         }
 
+        /* --- 基礎設定 --- */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'PingFang TC', '微軟正黑體', sans-serif; }
         
         body { 
@@ -42,10 +43,7 @@
             opacity: 0;
         }
 
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-
+        /* --- Header & 選單 --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
             background: rgba(15, 17, 26, 0.7); backdrop-filter: blur(20px); 
@@ -72,6 +70,7 @@
         .overlay-nav a { color: var(--text-muted); text-decoration: none; font-size: 2.5rem; font-weight: 900; transition: 0.4s; }
         .overlay-nav a:hover { color: var(--primary); transform: scale(1.1); }
 
+        /* --- 主內容區 --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 120px 5% 60px; }
         
         .hero-section { display: flex; align-items: center; justify-content: space-between; gap: 60px; margin-bottom: 80px; min-height: 60vh; }
@@ -90,112 +89,83 @@
             max-width: 600px; background: linear-gradient(90deg, rgba(56, 189, 248, 0.03), transparent);
         }
 
+        /* --- 照片框架設定 --- */
         .hero-image { flex: 0.8; display: flex; justify-content: flex-end; perspective: 1000px; }
-
-        /* 核心修正：將 .photo-frame 改為圖片容器，並確保 Vercel 能渲染 */
         .photo-frame {
             width: 360px; height: 480px; border-radius: 30px;
             box-shadow: 0 50px 100px rgba(0,0,0,0.6); border: 1px solid var(--border-glow);
             transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             overflow: hidden;
-            background-color: rgba(255,255,255,0.02); /* 預佔位底色 */
+            display: flex; align-items: center; justify-content: center;
         }
         .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 確保照片填滿框架不變形 */
-            display: block;
+            width: 100%; height: 100%; object-fit: cover; display: block;
         }
         .photo-frame:hover { transform: rotateY(-10deg) rotateX(5deg) translateY(-10px); border-color: var(--primary); box-shadow: 0 60px 120px rgba(56, 189, 248, 0.2); }
 
+        /* --- 卡片區塊 --- */
         .sub-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 30px; margin-top: 40px; }
         .content-card { 
             background: var(--surface); padding: 35px; border-radius: 28px; 
             border: 1px solid var(--border-glow); backdrop-filter: blur(10px);
             transition: 0.3s;
         }
-        .content-card:hover { border-color: rgba(56, 189, 248, 0.3); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
-        .card-title { color: var(--primary); font-weight: 800; font-size: 1.3rem; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; }
+        .card-title { color: var(--primary); font-weight: 800; font-size: 1.3rem; margin-bottom: 25px; }
         
         .timeline-item { position: relative; padding-left: 25px; border-left: 2px solid rgba(56, 189, 248, 0.2); margin-bottom: 20px; }
-        .timeline-item::before { content: ""; position: absolute; left: -6px; top: 8px; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
-        .time { font-size: 0.85rem; color: var(--primary); font-weight: bold; letter-spacing: 1px; }
+        .timeline-item::before { content: ""; position: absolute; left: -6px; top: 8px; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; }
+        .time { font-size: 0.85rem; color: var(--primary); font-weight: bold; }
         .exp-text { font-size: 1rem; color: var(--text-main); margin-top: 5px; line-height: 1.7; }
-        .exp-text strong { color: var(--primary); font-weight: 800; }
 
         .hobby-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
-        .hobby-item { 
-            background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 20px; 
-            border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 20px;
-            transition: 0.3s ease;
-        }
-        .hobby-item:hover { background: rgba(56, 189, 248, 0.05); border-color: var(--primary); transform: translateX(8px); }
-        .hobby-icon { font-size: 1.8rem; filter: drop-shadow(0 0 5px var(--primary-glow)); }
-        .hobby-info { display: flex; flex-direction: column; }
-        .hobby-name { font-weight: 800; font-size: 1.05rem; color: var(--text-main); margin-bottom: 4px; }
-        .hobby-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+        .hobby-item { background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 20px; }
+        .hobby-icon { font-size: 1.8rem; }
+        .hobby-name { font-weight: 800; font-size: 1.05rem; color: var(--text-main); }
 
-        footer { 
-            text-align: center; padding: 40px 20px; margin-top: 60px; 
-            border-top: 1px solid var(--border-glow); color: var(--text-muted); 
-            font-size: 0.85rem; letter-spacing: 1px; line-height: 1.8;
-        }
+        footer { text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid var(--border-glow); color: var(--text-muted); font-size: 0.85rem; letter-spacing: 1px; }
 
-        /* --- 比例感應 RWD 優化方案 --- */
+        /* --- 比例感應 RWD 最終方案 --- */
         @media (max-width: 1024px) {
             header {
                 height: clamp(60px, 10vh, 80px);
                 padding: 0 5%;
             }
             .current-page {
-                font-size: clamp(0.65rem, 2vw, 0.8rem);
-                max-width: 55%; 
+                font-size: clamp(0.6rem, 2.2vw, 0.8rem);
+                max-width: 55%; /* 確保絕對不會碰到右邊 MENU */
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
             .menu-toggle {
                 right: 5%;
-                padding: clamp(8px, 1.5vw, 10px) clamp(14px, 3vw, 24px);
-                font-size: clamp(0.75rem, 2vw, 0.85rem);
+                padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 24px);
+                font-size: clamp(0.7rem, 2vw, 0.85rem);
             }
-            .container { 
-                padding: clamp(90px, 12vh, 120px) 5% 40px; 
-            }
+            .container { padding-top: clamp(80px, 12vh, 120px); }
             
             .hero-section { 
-                flex-direction: column-reverse; /* 照片在文字下方 */
+                flex-direction: column-reverse; /* 照片改在文字下方 */
                 text-align: center; 
-                gap: 4vh;
+                gap: 5vh;
             }
+            .hero-image { display: flex !important; width: 100%; justify-content: center; perspective: none; }
             
-            .hero-image { 
-                display: flex !important; 
-                width: 100%;
-                justify-content: center;
-                flex: none;
-                perspective: none;
-                visibility: visible !important;
-                opacity: 1 !important;
-            }
-            
+            /* 照片框架比例感應縮放 */
             .photo-frame {
-                width: 60vw !important;
+                width: 60vw;
                 max-width: 280px;
-                aspect-ratio: 3/4; 
-                height: auto !important;
+                aspect-ratio: 3/4; /* 比例固定，高度自動計算 */
+                height: auto;
                 margin: 0 auto;
                 border-radius: 20px;
-                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             }
-            .photo-frame:hover { transform: none; } 
+            .photo-frame:hover { transform: none; }
 
-            h1 { font-size: clamp(2.8rem, 12vw, 4.8rem); }
-            h2 { font-size: clamp(1rem, 3.5vw, 1.2rem); letter-spacing: 2px; }
-            
+            h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+            .info-item { justify-content: center; }
+            .hero-desc { border-left: none; border-top: 3px solid var(--primary); padding: 20px 0 0 0; margin: 0 auto; }
             .sub-grid { grid-template-columns: 1fr; }
-            .hero-desc { padding: 25px; border-left: none; border-top: 3px solid var(--primary); }
-            .info-item { justify-content: center; font-size: clamp(0.85rem, 2.8vw, 1rem); }
         }
     </style>
 </head>
@@ -238,44 +208,32 @@
         </section>
 
         <div class="sub-grid">
-            <div class="content-card animate-in delay-1">
+            <div class="content-card animate-in" style="animation-delay: 0.2s;">
                 <div class="card-title">📍 學習與領導歷程</div>
                 <div class="timeline-item">
                     <span class="time">2024.09 - 現在</span>
-                    <p class="exp-text"><strong>靜宜大學 資管系</strong><br>擔任資管系學會 <strong>副會長</strong>，負責跨部門溝通與活動策劃。</p>
+                    <p class="exp-text"><strong>靜宜大學 資管系</strong><br>擔任資管系學會 <strong>副會長</strong></p>
                 </div>
                 <div class="timeline-item">
                     <span class="time">2021.09 - 2024.06</span>
-                    <p class="exp-text"><strong>高中時期 (社會組背景)</strong><br>
-                        擔任 <strong>學生會行政長</strong> / <strong>童軍社社長</strong> / <strong>畢聯會機動組長</strong>。<br>
-                        在多元社團經歷中培養出強大的行政組織力與團隊領導力。
-                    </p>
+                    <p class="exp-text"><strong>高中時期 (社會組背景)</strong><br>擔任 學生會行政長 / 童軍社社長 / 畢聯會機動組長</p>
                 </div>
             </div>
 
-            <div class="content-card animate-in delay-2">
+            <div class="content-card animate-in" style="animation-delay: 0.4s;">
                 <div class="card-title">🎨 生活興趣</div>
                 <div class="hobby-grid">
                     <div class="hobby-item">
                         <span class="hobby-icon">🏀</span>
-                        <div class="hobby-info">
-                            <span class="hobby-name">籃球運動</span>
-                            <span class="hobby-desc">目前擔任 <strong>資管系籃隊長</strong><br>主打 2 號位 (得分後衛)。</span>
-                        </div>
+                        <div class="hobby-info"><span class="hobby-name">籃球運動 (系籃隊長)</span></div>
                     </div>
                     <div class="hobby-item">
                         <span class="hobby-icon">🏐</span>
-                        <div class="hobby-info">
-                            <span class="hobby-name">排球運動</span>
-                            <span class="hobby-desc">擅長攔中與大砲位進攻。</span>
-                        </div>
+                        <div class="hobby-info"><span class="hobby-name">排球運動 (攔中/大砲)</span></div>
                     </div>
                     <div class="hobby-item">
                         <span class="hobby-icon">🏞️</span>
-                        <div class="hobby-info">
-                            <span class="hobby-name">戶外旅遊</span>
-                            <span class="hobby-desc">放鬆身心並探索未知靈感。</span>
-                        </div>
+                        <div class="hobby-info"><span class="hobby-name">戶外旅遊</span></div>
                     </div>
                 </div>
             </div>
