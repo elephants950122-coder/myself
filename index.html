@@ -33,6 +33,7 @@
             background-size: 40px 40px; opacity: 0.2; pointer-events: none;
         }
 
+        /* --- 全域動畫定義 --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -89,19 +90,22 @@
             max-width: 600px; background: linear-gradient(90deg, rgba(56, 189, 248, 0.03), transparent);
         }
 
-        /* --- 照片框架設定 --- */
-        .hero-image { flex: 0.8; display: flex; justify-content: flex-end; perspective: 1000px; }
+        /* --- 照片框架設定 (已移除所有動畫特效) --- */
+        .hero-image { flex: 0.8; display: flex; justify-content: flex-end; /* 移除 perspective */ }
+        
         .photo-frame {
             width: 360px; height: 480px; border-radius: 30px;
             box-shadow: 0 50px 100px rgba(0,0,0,0.6); border: 1px solid var(--border-glow);
-            transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             overflow: hidden;
             display: flex; align-items: center; justify-content: center;
+            /* 移除 transition */
+            background-color: rgba(255,255,255,0.01); /* 給一個極淡的底色確保容器存在 */
         }
         .photo-frame img {
             width: 100%; height: 100%; object-fit: cover; display: block;
         }
-        .photo-frame:hover { transform: rotateY(-10deg) rotateX(5deg) translateY(-10px); border-color: var(--primary); box-shadow: 0 60px 120px rgba(56, 189, 248, 0.2); }
+        
+        /* 移除 .photo-frame:hover 的所有旋轉和陰影變換特效 */
 
         /* --- 卡片區塊 --- */
         .sub-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 30px; margin-top: 40px; }
@@ -110,6 +114,7 @@
             border: 1px solid var(--border-glow); backdrop-filter: blur(10px);
             transition: 0.3s;
         }
+        .content-card:hover { border-color: rgba(56, 189, 248, 0.3); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
         .card-title { color: var(--primary); font-weight: 800; font-size: 1.3rem; margin-bottom: 25px; }
         
         .timeline-item { position: relative; padding-left: 25px; border-left: 2px solid rgba(56, 189, 248, 0.2); margin-bottom: 20px; }
@@ -124,7 +129,7 @@
 
         footer { text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid var(--border-glow); color: var(--text-muted); font-size: 0.85rem; letter-spacing: 1px; }
 
-        /* --- 比例感應 RWD 最終方案 --- */
+        /* --- 手機版 RWD 優化方案 (保持比例感應，但移除動畫) --- */
         @media (max-width: 1024px) {
             header {
                 height: clamp(60px, 10vh, 80px);
@@ -140,7 +145,7 @@
             .menu-toggle {
                 right: 5%;
                 padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 24px);
-                font-size: clamp(0.7rem, 2vw, 0.85rem);
+                font-size: clamp(0.75rem, 2vw, 0.85rem);
             }
             .container { padding-top: clamp(80px, 12vh, 120px); }
             
@@ -151,7 +156,7 @@
             }
             .hero-image { display: flex !important; width: 100%; justify-content: center; perspective: none; }
             
-            /* 照片框架比例感應縮放 */
+            /* 照片框架比例感應縮放 (無動畫) */
             .photo-frame {
                 width: 60vw;
                 max-width: 280px;
@@ -159,8 +164,9 @@
                 height: auto;
                 margin: 0 auto;
                 border-radius: 20px;
+                transform: none !important; /* 強制移除任何轉換 */
+                box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* 靜態陰影 */
             }
-            .photo-frame:hover { transform: none; }
 
             h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
             .info-item { justify-content: center; }
