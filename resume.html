@@ -126,14 +126,14 @@
             position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); margin-bottom: 60px;
             transition: 0.3s;
         }
-        .project-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .project-card:hover { border-color: var(--primary); }
         .project-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
         
         .project-header { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 30px; }
         
         .project-logo-frame {
             width: 150px; height: 150px; border-radius: 24px; 
-            background: #fff url('/static/app_logo.jpg') center/contain no-repeat;
+            background: #fff url('static/app_logo.jpg') center/contain no-repeat;
             border: 1px solid rgba(255,255,255,0.1); 
             box-shadow: 0 15px 30px rgba(0,0,0,0.4); flex-shrink: 0;
         }
@@ -174,36 +174,56 @@
 
         footer { text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid var(--border-glow); color: var(--text-muted); font-size: 0.85rem; letter-spacing: 1px; line-height: 1.8; }
 
-        /* --- 手機版 RWD 優化方案 --- */
+        /* --- 比例感應 RWD 最終方案 --- */
         @media (max-width: 900px) {
             header {
-                height: 70px;
-                padding: 0 20px;
+                height: clamp(60px, 8vh, 80px);
+                padding: 0 5%;
             }
             .current-page {
-                font-size: 0.7rem;
-                max-width: 60%; /* 防止文字碰到右邊 MENU */
-                line-height: 1.2;
+                font-size: clamp(0.6rem, 2.2vw, 0.8rem);
+                max-width: 55%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
                 letter-spacing: 1px;
             }
             .menu-toggle {
                 top: 15px;
-                right: 20px;
-                padding: 8px 16px;
-                font-size: 0.8rem;
+                right: 5%;
+                padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
+                font-size: clamp(0.7rem, 2vw, 0.85rem);
             }
             .container {
-                padding-top: 100px;
+                padding: clamp(90px, 12vh, 130px) 5% 40px;
             }
+            
             .resume-snapshot { grid-template-columns: 1fr; }
+            .profile-sidebar {
+                padding: clamp(20px, 5vw, 40px);
+            }
+            /* 照片改為螢幕比例縮放 */
+            .profile-img-placeholder {
+                width: 40vw;
+                max-width: 170px;
+                aspect-ratio: 170/180;
+                height: auto;
+                border-radius: 20px;
+            }
+            
             .project-header { flex-direction: column; align-items: center; text-align: center; }
             .project-meta, .btn-group { justify-content: center; }
             .skills-grid { grid-template-columns: 1fr; }
             .project-body { grid-template-columns: 1fr; }
             .plan-grid { grid-template-columns: 1fr; }
-            .project-card { padding: 30px; }
-            .project-logo-frame { margin-bottom: 10px; }
-            .section-header h2 { font-size: 2.2rem; }
+            
+            .project-card { 
+                padding: clamp(20px, 5vw, 40px); 
+                border-radius: 20px;
+            }
+            .project-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+            .section-header h2 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+            .project-logo-frame { margin-bottom: 15px; width: 120px; height: 120px; }
         }
     </style>
 </head>
