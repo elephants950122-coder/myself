@@ -23,7 +23,6 @@
             color: var(--text-main); line-height: 1.6; overflow-x: hidden;
         }
 
-        /* --- 動畫定義 --- */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -112,16 +111,47 @@
         }
         .btn-link:hover { background: var(--primary); color: var(--bg-dark); box-shadow: 0 0 20px var(--primary-glow); }
 
-        /* --- 頁尾 Footer --- */
         footer { 
             text-align: center; padding: 40px 20px; margin-top: 60px; 
             border-top: 1px solid var(--accent-border); color: var(--text-muted); 
             font-size: 0.85rem; letter-spacing: 1px; line-height: 1.8;
         }
 
+        /* --- 比例感應 RWD 最終方案 --- */
         @media (max-width: 768px) {
-            h2 { font-size: 2.5rem; }
-            .card { padding: 30px; }
+            header {
+                height: clamp(60px, 8vh, 80px);
+                padding: 0 5%;
+            }
+            .current-page {
+                font-size: clamp(0.6rem, 2.2vw, 0.8rem);
+                max-width: 55%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .menu-toggle {
+                right: 5%;
+                padding: clamp(6px, 1.5vw, 10px) clamp(12px, 3vw, 20px);
+                font-size: clamp(0.7rem, 2vw, 0.85rem);
+            }
+            .container {
+                margin-top: clamp(100px, 15vh, 160px);
+                padding: 0 5%;
+            }
+            h2 { font-size: clamp(2rem, 8vw, 3.5rem); }
+            .section-header { margin-bottom: 40px; }
+            
+            .card { 
+                padding: clamp(20px, 5vw, 50px); 
+                border-radius: 24px;
+                margin-bottom: 30px;
+            }
+            .card h3 { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+            .card p { font-size: clamp(0.9rem, 3.5vw, 1.1rem); }
+            
+            .trait-item { padding: 20px; }
+            .summary-box { padding: 25px; }
         }
     </style>
 </head>
@@ -151,14 +181,14 @@
             <p>診斷數據顯示，我在「建築營造」與「醫療保健」領域具備 PR 99 的極高興趣強度，同時在「資訊科技」專業領域也有顯著的高分表現。</p>
             
             <div class="visual-container">
-                <img src="{{ url_for('static', filename='ucan_chart-3.png') }}" alt="16職涯類型分析-1">
+                <img src="/static/ucan_chart-3.png" alt="16職涯類型分析-1">
             </div>
             <div class="insight-tags">
                 <span class="tag"># 建築營造 PR 99</span> <span class="tag"># 醫療保健 PR 99</span> <span class="tag"># 資訊科技核心</span>
             </div>
 
             <div class="visual-container">
-                <img src="{{ url_for('static', filename='ucan_chart-4.png') }}" alt="16職涯類型分析-2">
+                <img src="/static/ucan_chart-4.png" alt="16職涯類型分析-2">
             </div>
             <div class="insight-tags">
                 <span class="tag"># 數據導向</span> <span class="tag"># 實作導向</span>
@@ -169,7 +199,7 @@
             <h3>職業性格傾向</h3>
             <p>透過診斷剖面圖，可以清楚觀察到我在事務處理（C）與實作面（R）的性格優勢。</p>
             <div class="visual-container">
-                <img src="{{ url_for('static', filename='ucan_chart.png') }}" alt="職業性格診斷剖面圖">
+                <img src="/static/ucan_chart.png" alt="職業性格診斷剖面圖">
             </div>
         </div>
 
@@ -178,7 +208,7 @@
             <p>我的核心性格代碼為 <strong>CRS</strong>，結合診斷數據，展現出「嚴謹、實幹、善溝通」的跨領域特質：</p>
             
             <div class="visual-container">
-                <img src="{{ url_for('static', filename='ucan_chart-2.png') }}" alt="CRS 性格細節圖">
+                <img src="/static/ucan_chart-2.png" alt="CRS 性格細節圖">
             </div>
 
             <div class="trait-list">
