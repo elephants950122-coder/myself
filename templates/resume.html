@@ -16,7 +16,7 @@
             --text-muted: #94a3b8;
             --border-glow: rgba(255, 255, 255, 0.08);
             --accent: #818cf8;
-            --award: #fbbf24;
+            --award: #fbbf24; /* 金色，用於獎狀特效 */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'PingFang TC', '微軟正黑體', sans-serif; }
@@ -83,13 +83,18 @@
             background: var(--surface); border: 1px solid var(--border-glow); border-radius: 28px;
             padding: 40px 30px; text-align: center; backdrop-filter: blur(10px); display: flex; flex-direction: column;
         }
+        
+        /* 個人照片容器 */
         .profile-img-placeholder {
             width: 170px; height: 180px; border-radius: 24px; margin: 0 auto 25px;
             background: linear-gradient(135deg, var(--surface), rgba(56, 189, 248, 0.1));
             border: 2px solid rgba(56, 189, 248, 0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            background-image: url('static/me.jpg'); 
-            background-size: cover; background-position: center top; 
+            overflow: hidden; /* 確保圓角生效 */
         }
+        .profile-img-placeholder img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+
         .profile-name { font-size: 1.8rem; font-weight: 900; color: var(--text-main); margin-bottom: 5px; }
         .profile-en-name { font-size: 0.9rem; color: var(--primary); letter-spacing: 2px; margin-bottom: 10px; }
         
@@ -131,11 +136,16 @@
         
         .project-header { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 30px; }
         
+        /* App Logo 容器 */
         .project-logo-frame {
             width: 150px; height: 150px; border-radius: 24px; 
-            background: #fff url('static/app_logo.jpg') center/contain no-repeat;
+            background: #fff;
             border: 1px solid rgba(255,255,255,0.1); 
             box-shadow: 0 15px 30px rgba(0,0,0,0.4); flex-shrink: 0;
+            overflow: hidden; /* 確保圓角生效 */
+        }
+        .project-logo-frame img {
+            width: 100%; height: 100%; object-fit: contain; display: block;
         }
 
         .project-header-info { flex: 1; }
@@ -244,7 +254,9 @@
     <div class="container">
         <div class="resume-snapshot animate-in">
             <div class="profile-sidebar">
-                <div class="profile-img-placeholder"></div>
+                <div class="profile-img-placeholder">
+                    <img src="static/me.jpg" alt="林建宇">
+                </div>
                 <div class="profile-name">林建宇</div>
                 <div class="profile-en-name">LIN, CHIEN-YU</div>
                 
@@ -302,7 +314,9 @@
 
         <div class="project-card animate-in delay-1">
             <div class="project-header">
-                <div class="project-logo-frame"></div>
+                <div class="project-logo-frame">
+                    <img src="static/app_logo.jpg" alt="Maria Time Logo">
+                </div>
                 
                 <div class="project-header-info">
                     <div class="award-badge">🏆 期末 App 競賽 第二名</div>
@@ -351,6 +365,15 @@
                         從對 Kotlin 語法感到陌生，到能熟練運用 Android Studio 與 GitHub 協作，整個過程帶來了極大成就感。 我們的「產能導向」結合「認知友善」系統設計，獲得了現場評審——授課教授 楊子青老師與瑪利亞基金會雲端發展室 林浩棟主任的青睞並榮獲第二名。 這次專案讓我深刻體會，工程師不僅要會寫代碼，更要具備同理心，將技術轉化為解決真實痛點的數位輔具。
                     </p>
                 </div>
+                
+                <div style="grid-column: 1 / -1; margin-top: 30px; display: block !important;">
+                    <img src="static/award.png" alt="期末App競賽第二名獎狀" 
+                         style="width: 100%; height: auto; border-radius: 15px; 
+                                border: 2px solid var(--award); /* 金色特效框 */
+                                box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2); /* 金色光暈特效 */
+                                display: block !important; /* 強制顯示 */">
+                </div>
+
             </div>
         </div>
 
