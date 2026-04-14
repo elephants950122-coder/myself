@@ -45,7 +45,6 @@
 
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
 
         header {
             position: fixed; top: 0; left: 0; width: 100%; height: 80px; 
@@ -88,7 +87,7 @@
             width: 170px; height: 180px; border-radius: 24px; margin: 0 auto 25px;
             background: linear-gradient(135deg, var(--surface), rgba(56, 189, 248, 0.1));
             border: 2px solid rgba(56, 189, 248, 0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            background-image: url('/static/me.jpg'); 
+            background-image: url('static/me.jpg'); 
             background-size: cover; background-position: center top; 
         }
         .profile-name { font-size: 1.8rem; font-weight: 900; color: var(--text-main); margin-bottom: 5px; }
@@ -131,13 +130,16 @@
         .project-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
         
         .project-header { display: flex; gap: 30px; align-items: flex-start; margin-bottom: 30px; }
-        .project-logo {
-            width: 150px; height: 150px; border-radius: 24px; object-fit: contain; 
-            border: 1px solid rgba(255,255,255,0.1); background: #fff; padding: 5px;
+        
+        /* 改為背景圖方式載入 App Logo，參照 me.jpg 寫法 */
+        .project-logo-frame {
+            width: 150px; height: 150px; border-radius: 24px; 
+            background: #fff url('static/App_logo.jpg') center/contain no-repeat;
+            border: 1px solid rgba(255,255,255,0.1); 
             box-shadow: 0 15px 30px rgba(0,0,0,0.4); flex-shrink: 0;
         }
-        .project-header-info { flex: 1; }
 
+        .project-header-info { flex: 1; }
         .project-title { font-size: 2.2rem; color: var(--text-main); font-weight: 900; line-height: 1.3; margin-bottom: 12px; }
         .award-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); color: var(--award); padding: 6px 14px; border-radius: 50px; font-weight: 800; font-size: 0.85rem; margin-bottom: 15px; }
         .project-meta { display: flex; gap: 20px; align-items: center; color: var(--text-muted); font-size: 0.95rem; flex-wrap: wrap; }
@@ -204,15 +206,13 @@
                 <div class="profile-img-placeholder"></div>
                 <div class="profile-name">林建宇</div>
                 <div class="profile-en-name">LIN, CHIEN-YU</div>
-                
                 <div class="profile-summary">
                     結合細膩的觀察力與紮實的程式邏輯，擅長跨部門溝通與專案執行。致力於開發能解決真實痛點的數位解決方案。
                 </div>
-                
                 <div class="contact-info">
                     <div style="font-size: 0.9rem; color: var(--text-main); font-weight: bold; margin-bottom: 10px;">靜宜大學 資訊管理學系</div>
-                    <div class="contact-item"><i>🎓</i> 大二在學生 (預計 2028 畢業)</div>
-                    <div class="contact-item"><i>📧</i> <a href="mailto:s1130311@o365st.pu.edu.tw" class="contact-link">s1130311@o365st.pu.edu.tw</a></div>
+                    <div class="contact-item">🎓 大二在學生 (預計 2028 畢業)</div>
+                    <div class="contact-item">📧 <a href="mailto:s1130311@o365st.pu.edu.tw" class="contact-link">s1130311@o365st.pu.edu.tw</a></div>
                 </div>
             </div>
 
@@ -221,7 +221,6 @@
                     <h3>應徵職務目標 (Target Role)</h3>
                     <h2>企業內部系統開發 / <br>資安管理工程師</h2>
                 </div>
-                
                 <div class="skills-grid">
                     <div class="skill-group">
                         <h4>💻 基礎技術與接觸領域</h4>
@@ -251,7 +250,6 @@
             </div>
         </div>
 
-
         <div class="section-header animate-in" style="margin-top: 80px;">
             <span class="section-tag">Portfolio & Case Study</span>
             <h2>實戰專案經歷</h2>
@@ -259,16 +257,15 @@
 
         <div class="project-card animate-in delay-1">
             <div class="project-header">
-                <img src="./static/App_logo.jpg" alt="App Logo" class="project-logo" onerror="this.style.display='none'">
+                <div class="project-logo-frame"></div>
                 
                 <div class="project-header-info">
                     <div class="award-badge">🏆 期末 App 競賽 第二名</div>
                     <h3 class="project-title">Maria Time<br> 智慧預約與友善生產管理系統</h3>
                     <div class="project-meta">
-                        <span class="meta-item"><i>📅</i> 2025 年 12 月完成</span>
-                        <span class="meta-item"><i>📚</i> 靜宜資管「行動應用軟體開發」產學合作專案</span>
+                        <span class="meta-item">📅 2025 年 12 月完成</span>
+                        <span class="meta-item">📚 靜宜資管「行動應用軟體開發」產學合作專案</span>
                     </div>
-                    
                     <div class="btn-group">
                         <a href="https://www.youtube.com/watch?v=Q18hnogVMok" target="_blank" class="btn-primary">▶ 觀看 Demo 影片</a>
                         <a href="https://github.com/elephants950122-coder/Maria.app20251221.git" target="_blank" class="btn-outline">💻 GitHub 原始碼</a>
@@ -292,7 +289,6 @@
                         <li><strong>員工端 (認知友善設計)：</strong>針對庇護工場員工特性，改採<strong>「時段區塊化看板」</strong>與<strong>「數據圖塊化」</strong>，降低心智障礙員工多工處理的焦慮感。</li>
                     </ul>
                 </div>
-
                 <div class="desc-block">
                     <div class="desc-title">💻 技術實作與系統架構</div>
                     <ul class="desc-list">
@@ -301,7 +297,6 @@
                         <li><strong>自動化通知：</strong>克服邏輯與 API 串接瓶頸，成功實作下單與出餐完成的 Email 自動通知機制。</li>
                     </ul>
                 </div>
-
                 <div class="summary-block">
                     <div class="summary-title">💡 業界驗證與個人反思</div>
                     <p class="summary-text">
@@ -310,7 +305,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="section-header animate-in" style="margin-top: 80px;">
             <span class="section-tag">Career Roadmap</span>
@@ -323,27 +317,19 @@
                     <div class="plan-icon">📚</div>
                     <div class="plan-phase">Short-Term (在校期間)</div>
                     <div class="plan-title">深耕基礎與專案累積</div>
-                    <p class="plan-desc">
-                        作為大二學生，首要目標是扎實本科基礎知識，並持續精進前後端開發技術。 計畫透過參與更多的課堂與跨系產學專案，將所學轉化為實體作品，並藉由系學會副會長的經驗，精進技術團隊的管理與溝通。
-                    </p>
+                    <p class="plan-desc">作為大二學生，首要目標是扎實本科基礎知識，並持續精進前後端開發技術。 計畫透過參與更多的課堂與跨系產學專案，將所學轉化為實體作品，並藉由系學會副會長的經驗，精進技術團隊的管理與溝通。</p>
                 </div>
-
                 <div class="plan-card">
                     <div class="plan-icon">💼</div>
                     <div class="plan-phase">Mid-Term (大三至大四)</div>
                     <div class="plan-title">企業實習與實戰磨練</div>
-                    <p class="plan-desc">
-                        不盲目追求紙本證照，而是期望進入真實職場環境。計畫於高年級時尋求企業內部 MIS 或系統開發相關的實習機會，提前了解企業資訊系統的運作流程，並學習如何在壓力下解決跨部門的系統需求痛點。
-                    </p>
+                    <p class="plan-desc">不盲目追求紙本證照，而是期望進入真實職場環境。計畫於高年級時尋求企業內部 MIS 或系統開發相關的實習機會，提前了解企業資訊系統的運作流程，並學習如何在壓力下解決跨部門的系統需求痛點。</p>
                 </div>
-
                 <div class="plan-card">
                     <div class="plan-icon">🚀</div>
                     <div class="plan-phase">Long-Term (畢業後 1-3 年)</div>
                     <div class="plan-title">能獨立作業的系統工程師</div>
-                    <p class="plan-desc">
-                        期望在進入職場後，能迅速熟悉企業 IT 基礎架構，具備獨立維護與開發系統的能力。 長期目標是成為一位既懂底層技術邏輯，又擁有商業思維與溝通手腕的跨領域科技人才，為企業帶來實質的營運效益。
-                    </p>
+                    <p class="plan-desc">期望在進入職場後，能迅速熟悉企業 IT 基礎架構，具備獨立維護與開發系統的能力。 長期目標是成為一位既懂底層技術邏輯，又擁有商業思維與溝通手腕的跨領域科技人才，為企業帶來實質的營運效益。</p>
                 </div>
             </div>
         </div>
@@ -358,7 +344,6 @@
         function toggleMenu() { 
             const o = document.getElementById('navOverlay'); 
             const btn = document.getElementById('menuBtn');
-            
             if (o.style.display === 'flex') {
                 o.style.display = 'none';
                 btn.innerHTML = 'MENU ☰';
